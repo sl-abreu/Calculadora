@@ -326,7 +326,7 @@ public class Calculadora extends javax.swing.JFrame {
     /**
      * 
      * @param exp   Cadena (expresión matemática) a convertir.
-     * @return  Un arreglo de String que contiene el equivalente a la expresión en notación postfija.
+     * @return  Un arreglo de String que contiene el equivalente a la expresión en notación postfija, marcando el final de la expresión con un ";".
      */
     public static String[] conviertePostFija(String exp){
         String[] auxArr, postFija=new String[exp.length()+1];
@@ -419,14 +419,14 @@ public class Calculadora extends javax.swing.JFrame {
                         calcs.push(num1*num2);
                         break;
                     case '/':
-                        if(num2!=0)
-                            calcs.push(num1/num2);
-                        else if(num1==0)
-                            calcs.push(Double.NaN);
-                        else if(num1>0)
-                            calcs.push(Double.POSITIVE_INFINITY);
-                        else
-                            calcs.push(Double.NEGATIVE_INFINITY);
+                        /*
+                        No es necesario revisar si num2==0, pues
+                        la clase Double lo hace de manera
+                        predeterminada, y asigna un NaN (Not-a-Number)
+                        en caso de 0/0, y un valor infinito en el 
+                        caso de a/0 con a!=0.
+                        */
+                        calcs.push(num1/num2);
                         break;
                     case '^':
                         calcs.push(Math.pow(num1, num2));
