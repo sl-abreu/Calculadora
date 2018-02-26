@@ -360,7 +360,15 @@ public class Calculadora extends javax.swing.JFrame {
                 }
                 opers.push(temp);
                 i++;
-                if(i<exp.length() && exp.charAt(i)=='-'){
+                /*
+                En caso de que haya un número negativo después del operador
+                leído, se usa un while para saltar los posibles espacios
+                intermedios y agregar dicho signo al inicio del siguiente
+                elemento del arreglo postFija.
+                */
+                while(exp.charAt(i)==' ')
+                    i++;
+                if(exp.charAt(i)=='-'){
                     postFija[j]="-";
                     i++;
                 }
