@@ -170,13 +170,13 @@ public class Calculadora extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton evaluaBut;
-    protected javax.swing.JTextField expTxt;
+    private javax.swing.JButton evaluaBut;
+    private javax.swing.JTextField expTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    protected javax.swing.JButton limpBut;
-    protected javax.swing.JTextField resTxt;
+    private javax.swing.JButton limpBut;
+    private javax.swing.JTextField resTxt;
     // End of variables declaration//GEN-END:variables
 
     //Métodos creados
@@ -192,7 +192,10 @@ public class Calculadora extends javax.swing.JFrame {
      */
     public static int prioridad(char op){
         int prio;
-        
+        /*
+        Se utiliza un switch (sugerido por NetBeans en lugar de if´s anidados),
+        para asignar la prioridad de operadores.
+        */
         switch (op) {
             case '+':
             case '-':
@@ -222,7 +225,7 @@ public class Calculadora extends javax.swing.JFrame {
      *      <li> /
      *      <li> ^
      *      </ul>
-     *  <li> False: si no se cumple ninguno de los anteriores.
+     *  <li> False: si es cualquier otro caracter.
      *  </ul>
      */
     public static boolean esOperador(char op){
@@ -273,10 +276,7 @@ public class Calculadora extends javax.swing.JFrame {
                     }
                     else if(esOperador(aux) && (Character.isDigit(verf.peek()) || verf.peek()==')' || (aux=='-' && !banOp && verf.peek()!='.'))){
                         banPun=false;
-                        if(aux=='-' && verf.peek()=='-')
-                            banOp=true;
-                        else
-                            banOp=false;
+                        banOp=aux=='-' && verf.peek()=='-';
                         if(verf.peek()!='(')
                             verf.pop();
                         verf.push(aux);
@@ -314,11 +314,11 @@ public class Calculadora extends javax.swing.JFrame {
      * @param ini   Posición del paréntesis que abre.
      * @return  La posición del paréntesis que cierra, correspondiente al encontrado en la posición ini.
      */
-    private static int rangoParentesis(String exp, int ini){
+    private static int buscaFinParentesis(String exp, int ini){
         do{
             ini++;
             if(exp.charAt(ini)=='(')
-                ini=rangoParentesis(exp,ini);
+                ini=buscaFinParentesis(exp,ini);
         }while(exp.charAt(ini)!=')');
         ini++;
         return ini;
@@ -334,7 +334,9 @@ public class Calculadora extends javax.swing.JFrame {
         int i=0,j=0,auxI;
         char temp;
         
-        if(exp.charAt(0)=='-'){
+        while(i<exp.length()-1 && exp.charAt(i)==' ')
+            i++;
+        if(exp.charAt(i)=='-'){
             postFija[0]="-";
             i++;
         }
@@ -372,7 +374,7 @@ public class Calculadora extends javax.swing.JFrame {
             else if(temp=='('){
                 int k=0;
                 auxI=i;
-                i=rangoParentesis(exp,auxI);
+                i=buscaFinParentesis(exp,auxI);
                 auxArr=conviertePostFija(exp.substring(auxI+1, i-1));
                 while(!auxArr[k].equals(";")){
                     postFija[j]=auxArr[k];
@@ -438,7 +440,7 @@ public class Calculadora extends javax.swing.JFrame {
         }
         res=calcs.pop();
         if(!calcs.isEmpty())
-            res=909.909;
+            res=Double.NaN;
         return res;
     }
 }
