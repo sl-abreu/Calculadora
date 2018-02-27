@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author adeandakuri
  */
-public class CalculadoraTest {
+public class ProcesadorExpresionesTest {
 
-    public CalculadoraTest() {
+    public ProcesadorExpresionesTest() {
     }
 
     @BeforeClass
@@ -56,7 +56,7 @@ public class CalculadoraTest {
         System.out.println("prioridad");
         char op = '+';
         int expResult = 1;
-        int result = Calculadora.prioridad(op);
+        int result = ProcesadorExpresiones.prioridad(op);
         assertEquals(expResult, result);
     }
 
@@ -64,7 +64,7 @@ public class CalculadoraTest {
         System.out.println("prioridad");
         char op = '*';
         int expResult = 2;
-        int result = Calculadora.prioridad(op);
+        int result = ProcesadorExpresiones.prioridad(op);
         assertEquals(expResult, result);
     }
 
@@ -78,7 +78,7 @@ public class CalculadoraTest {
         System.out.println("esOperador");
         char op = '+';
         boolean expResult = true;
-        boolean result = Calculadora.esOperador(op);
+        boolean result = ProcesadorExpresiones.esOperador(op);
         assertEquals(expResult, result);
     }
 
@@ -90,7 +90,7 @@ public class CalculadoraTest {
         System.out.println("esOperador");
         char op = '9';
         boolean expResult = false;
-        boolean result = Calculadora.esOperador(op);
+        boolean result = ProcesadorExpresiones.esOperador(op);
         assertEquals(expResult, result);
     }
 
@@ -103,7 +103,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = "(3.2)+(4.5+)2.1-4)*(3.3)";
         boolean expResult = false;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
 
@@ -116,7 +116,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = ")3.2()+(4.5+2.1-4)*(3.3)";
         boolean expResult = false;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
 
@@ -129,7 +129,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = "(3.2)+(4.5+2.1-4)*(3.3)";
         boolean expResult = true;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
 
@@ -142,7 +142,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = "(-.3.2)+(4.5+2.1-4)*(3.3)";
         boolean expResult = false;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
    
@@ -152,7 +152,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = "(--3.2)+(4.5+2.1-4)*(3.3)";
         boolean expResult = true;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
     
@@ -162,7 +162,7 @@ public class CalculadoraTest {
         System.out.println("revisaExpresion");
         String exp = "(---3.2)+(4.5+2.1-4)*(3.3)";
         boolean expResult = false;
-        boolean result = Calculadora.revisaExpresion(exp);
+        boolean result = ProcesadorExpresiones.revisaExpresion(exp);
         assertEquals(expResult, result);
     }
 
@@ -174,7 +174,7 @@ public class CalculadoraTest {
         System.out.println("conviertePostFija");
         String exp = "(6+2)*3/2-4";
         String[] expResult = {"6" ,"2", "+", "3", "*", "2", "/", "4", "-",";", null, null} ;
-        String[] result = Calculadora.conviertePostFija(exp);
+        String[] result = ProcesadorExpresiones.conviertePostFija(exp);
         assertArrayEquals(expResult, result);
     }
 
@@ -186,7 +186,7 @@ public class CalculadoraTest {
         System.out.println("evaluaPostFija");
         String[] postFija =  {"6" ,"2", "+", "3", "*", "2", "/", "4", "-",";", null, null} ;
         double expResult = 8.0;
-        double result = Calculadora.evaluaPostFija(postFija);
+        double result = ProcesadorExpresiones.evaluaPostFija(postFija);
         assertEquals(expResult, result, 0.0);
     }
 
