@@ -169,10 +169,11 @@ public class ProcesadorExpresiones {
      * @return  Un arreglo de String que contiene el equivalente a la expresión en notación postfija, marcando el final de la expresión con un ";".
      */
     public static String[] conviertePostFija(String exp){
-        String[] auxArr, postFija=new String[exp.length()+1];
+        String[] auxArr, postFija=new String[exp.length()+3];
         PilaA<Character> opers=new PilaA();
         int i=0,j=0,auxI;
         char temp;
+        boolean parNeg=false;
         
         while(i<exp.length()-1 && exp.charAt(i)==' ')
             i++;
@@ -224,10 +225,18 @@ public class ProcesadorExpresiones {
                 auxI=i;
                 i=buscaFinParentesis(exp,auxI);
                 auxArr=conviertePostFija(exp.substring(auxI+1, i-1));
+                if(postFija[j]!=null)
+                    parNeg=true;
                 while(!auxArr[k].equals(";")){
                     postFija[j]=auxArr[k];
                     j++;
                     k++;
+                }
+                if(parNeg){
+                    postFija[j]="-1";
+                    postFija[j+1]="*";
+                    j+=2;
+                    parNeg=false;
                 }
             }
             else if(temp==' ')
