@@ -179,5 +179,4 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton limpBut;
     private javax.swing.JTextField resTxt;
     // End of variables declaration//GEN-END:variables
-
 }

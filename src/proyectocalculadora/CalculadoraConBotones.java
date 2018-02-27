@@ -521,5 +521,4 @@ public class CalculadoraConBotones extends javax.swing.JFrame {
     private javax.swing.JButton tresBut;
     private javax.swing.JButton unoBut;
     // End of variables declaration//GEN-END:variables
-
 }
