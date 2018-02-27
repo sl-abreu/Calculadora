@@ -50,6 +50,7 @@ public class Calculadora extends javax.swing.JFrame {
         resTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         expTxt.setText("   ");
 
