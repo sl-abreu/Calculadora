@@ -173,7 +173,7 @@ public class ProcesadorExpresionesTest {
     public void testConviertePostFija() {
         System.out.println("conviertePostFija");
         String exp = "(6+2)*3/2-4";
-        String[] expResult = {"6" ,"2", "+", "3", "*", "2", "/", "4", "-",";", null, null} ;
+        String[] expResult = {"6" ,"2", "+", "3", "*", "2", "/", "4", "-",";", null, null, null, null} ;
         String[] result = ProcesadorExpresiones.conviertePostFija(exp);
         assertArrayEquals(expResult, result);
     }
